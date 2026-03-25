@@ -22,7 +22,7 @@ export default function Projects() {
       title: 'Пародия на Ebay',
       description: 'Юмористическая версия маркетплейса с товарами, личным профилем профилем, заказами и интерактивными элементами.',
       tags: ['HTML', 'CSS', 'JavaScript'],
-      demo: '/ebay-parody.html', // Ссылка на HTML файл в /public
+      demo: 'ebay-parody.html', // Ссылка на HTML файл в /public
       color: 'from-orange-500 to-amber-500',
       icon: '🛒'
     },
@@ -30,7 +30,7 @@ export default function Projects() {
       title: 'Магазин ювелирии',
       description: 'Проект с средневековым стилем, сделаный в качестве учебного проекта.',
       tags: ['HTML', 'CSS', 'JavaScript'],
-      demo: '/jewelry-store.html', // Ссылка на HTML файл в /public
+      demo: 'jewelry-store.html', // Ссылка на HTML файл в /public
       color: 'from-pink-500 to-rose-500',
       icon: '💎'
     },
