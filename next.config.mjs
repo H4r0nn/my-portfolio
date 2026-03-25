@@ -1,10 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',        // ✅ Статический экспорт для GitHub Pages
+  output: 'export',           // ✅ Статический экспорт
   images: {
-    unoptimized: true,     // ✅ Отключаем оптимизацию изображений (не работает на статике)
+    unoptimized: true,        // ✅ Отключаем оптимизацию изображений
   },
-  // База пути будет подставляться автоматически при деплое
+  basePath: '/my-portfolio',  // ✅ ВАЖНО: имя твоего репозитория
+  assetPrefix: '/my-portfolio/', // ✅ Для корректной загрузки стилей и скриптов
 };
 
 export default nextConfig;
