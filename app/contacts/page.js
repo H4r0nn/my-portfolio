@@ -20,8 +20,8 @@ export default function Contacts() {
     },
     { 
       platform: 'Email', 
-      handle: 'yaroslav@example.com', 
-      link: 'mailto:yaroslav@example.com',
+      handle: 'yaroslav_bykov_06@mail.ru', 
+      link: 'yaroslav_bykov_06@mail.ru',
       icon: '📧',
       color: 'hover:border-red-500 hover:from-red-900/30 hover:to-orange-900/30',
       gradient: 'from-red-500 to-orange-500'
@@ -37,7 +37,7 @@ export default function Contacts() {
     { 
       platform: 'YouTube', 
       handle: 'YouTube канал', 
-      link: 'https://youtube.com',
+      link: 'https://www.youtube.com/@haron3492/featured',
       icon: '🎬',
       color: 'hover:border-red-600 hover:from-red-900/30 hover:to-pink-900/30',
       gradient: 'from-red-600 to-pink-600'
