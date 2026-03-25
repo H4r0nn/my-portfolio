@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Souls | Gothic Luxury</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blood-red: #8a0303;
+            --dark-blood: #5a0000;
+            --black-gold: #1a1a1a;
+            --antique-gold: #d4af37;
+            --bone-white: #f8f4e9;
+            --shadow-black: #0a0a0a;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, var(--shadow-black) 0%, var(--black-gold) 100%);
+            color: var(--bone-white);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Enhanced background with animated patterns */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(138, 3, 3, 0.08) 0%, transparent 40%),
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212, 175, 55, 0.02) 10px, rgba(212, 175, 55, 0.02) 20px);
+            pointer-events: none;
+            z-index: -1;
+            animation: backgroundShift 20s infinite linear;
+        }
+
+        /* Animated ornamental graphics */
+        .ornament {
+            position: absolute;
+            opacity: 0.15;
+            z-index: -1;
+            animation: pulse 4s infinite alternate;
+        }
+
+        .ornament-1 {
+            top: 10%;
+            left: 5%;
+            font-size: 8rem;
+            transform: rotate(-15deg);
+            color: var(--antique-gold);
+            animation-delay: 0s;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .ornament-2 {
+            bottom: 15%;
+            right: 8%;
+            font-size: 6rem;
+            transform: rotate(25deg);
+            color: var(--blood-red);
+            animation-delay: 1s;
+            text-shadow: 0 0 15px rgba(138, 3, 3, 0.4);
+        }
+
+        .ornament-3 {
+            top: 40%;
+            right: 15%;
+            font-size: 4rem;
+            color: var(--antique-gold);
+            animation-delay: 2s;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Floating particles with different sizes and speeds */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--antique-gold);
+            border-radius: 50%;
+            opacity: 0.3;
+            z-index: -1;
+            animation: floatParticle 15s infinite linear;
+        }
+
+        /* Animated geometric patterns */
+        .geometric-pattern {
+            position: absolute;
+            opacity: 0.08;
+            z-index: -1;
+            animation: rotatePattern 30s infinite linear;
+        }
+
+        .pattern-1 {
+            top: 20%;
+            left: 30%;
+            font-size: 12rem;
+            color: var(--blood-red);
+            animation-duration: 40s;
+        }
+
+        .pattern-2 {
+            bottom: 25%;
+            left: 10%;
+            font-size: 10rem;
+            color: var(--antique-gold);
+            animation-duration: 35s;
+            animation-direction: reverse;
+        }
+
+        .pattern-3 {
+            top: 60%;
+            right: 20%;
+            font-size: 8rem;
+            color: var(--blood-red);
+            animation-duration: 45s;
+        }
+
+        header {
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.3);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            animation: headerGlow 3s infinite alternate;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            background: linear-gradient(to right, var(--bone-white), var(--antique-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            animation: logoGlow 2s infinite alternate;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--antique-gold), transparent);
+            animation: logoLine 2s infinite alternate;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--bone-white);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+        }
+
+        nav a:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        nav a:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        nav a:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        nav a:nth-child(4) {
+            animation-delay: 0.8s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--antique-gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--antique-gold);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+            transform: translateY(-2px);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+            animation: slideInLeft 1.5s ease forwards;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(to bottom, var(--bone-white) 0%, var(--antique-gold) 50%, var(--blood-red) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textGlow 3s infinite alternate, fadeIn 1.5s ease 0.5s forwards;
+            opacity: 0;
+            position: relative;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeIn 1.5s ease 1s forwards;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .hero p::before {
+            content: '"';
+            position: absolute;
+            left: -20px;
+            top: -10px;
+            font-size: 2rem;
+            color: var(--antique-gold);
+            opacity: 0.5;
+        }
+
+        .hero p::after {
+            content: '"';
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            font-size: 2rem;
+            color: var(--antique-gold);
+            opacity: 0.5;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: var(--bone-white);
+            border: 2px solid var(--antique-gold);
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            opacity: 0;
+            animation: fadeIn 1.5s ease 1.5s forwards;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--antique-gold), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--antique-gold);
+            color: var(--black-gold);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            transform: scale(1.05) translateY(-2px);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            max-width: 600px;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 30px rgba(138, 3, 3, 0.4));
+            animation: float 6s ease-in-out infinite, fadeInRight 1.5s ease 0.8s forwards;
+            opacity: 0;
+            transform: translateY(-50%) translateX(50px);
+            z-index: 1;
+        }
+
+        /* Additional decorative graphic next to hero text */
+        .hero-decorative {
+            position: absolute;
+            left: calc(5% + 600px + 20px);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 80px;
+            height: 300px;
+            opacity: 0.2;
+            z-index: 1;
+            animation: decorativeFloat 8s infinite ease-in-out;
+        }
+
+        .hero-decorative svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Custom image placeholder for user's image */
+        .custom-image-placeholder {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            max-width: 600px;
+            height: auto;
+            opacity: 0.9;
+            z-index: 1;
+            filter: drop-shadow(0 0 30px rgba(138, 3, 3, 0.4));
+            animation: float 6s ease-in-out infinite, fadeInRight 1.5s ease 0.8s forwards;
+            opacity: 0;
+            transform: translateY(-50%) translateX(50px);
+            border: 2px solid var(--antique-gold);
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(10, 10, 10, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--antique-gold);
+            text-align: center;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .custom-image-placeholder:hover {
+            transform: translateY(-50%) translateX(50px) scale(1.02);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Gothic line art centerpiece */
+        .gothic-art {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 800px;
+            height: 60vh;
+            z-index: 0;
+            opacity: 0.12;
+            pointer-events: none;
+            animation: artPulse 6s infinite alternate;
+        }
+
+        .gothic-art svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .collection {
+            padding: 8rem 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collection::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(138, 3, 3, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 5rem;
+            letter-spacing: 5px;
+            color: var(--antique-gold);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            animation: titleGlow 4s infinite alternate;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--antique-gold);
+            box-shadow: 0 0 10px var(--antique-gold);
+            animation: titleLinePulse 2s infinite alternate;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border: 2px solid var(--antique-gold);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.4s ease;
+            cursor: pointer;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: slideInUp 1s ease forwards;
+            background: linear-gradient(45deg, rgba(26, 26, 26, 0.8), rgba(10, 10, 10, 0.9));
+        }
+
+        .gallery-item:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .gallery-item:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .gallery-item:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(138, 3, 3, 0.4);
+            border-color: var(--blood-red);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            filter: grayscale(20%) brightness(1.1) contrast(1.1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.15) rotate(2deg);
+            filter: grayscale(0%) brightness(1.2) contrast(1.2);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 2rem;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--antique-gold);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            position: relative;
+        }
+
+        .gallery-overlay h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--blood-red);
+        }
+
+        /* Product Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--black-gold);
+            border: 2px solid var(--antique-gold);
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 2rem;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(138, 3, 3, 0.08) 0%, transparent 40%);
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border: 1px solid var(--antique-gold);
+            transition: transform 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 40%, rgba(138, 3, 3, 0.2) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-content:hover .modal-image::before {
+            opacity: 1;
+        }
+
+        .modal-content:hover .modal-image {
+            transform: scale(1.05) rotate(1deg);
+        }
+
+        .modal-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .modal-info h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--antique-gold);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            position: relative;
+        }
+
+        .modal-info h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--antique-gold), var(--blood-red));
+        }
+
+        .modal-info p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: modalTextFadeIn 0.8s ease forwards;
+        }
+
+        .modal-info p:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .modal-info p:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .modal-price {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--blood-red);
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px rgba(138, 3, 3, 0.4);
+            opacity: 0;
+            animation: modalTextFadeIn 0.8s ease 0.6s forwards;
+            position: relative;
+        }
+
+        .modal-price::before {
+            content: '✦ ';
+            color: var(--antique-gold);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: 2px solid var(--antique-gold);
+            color: var(--bone-white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .modal-close:hover {
+            background: var(--antique-gold);
+            color: var(--black-gold);
+            transform: rotate(90deg) scale(1.1);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+        }
+
+        .philosophy {
+            padding: 8rem 5%;
+            background: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.9)),
+                url('image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M20,20 L80,80 M80,20 L20,80" stroke="%23d4af37" stroke-width="0.5" opacity="0.1"/></svg>');
+            background-size: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .philosophy::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 30% 40%, rgba(138, 3, 3, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 70% 60%, rgba(212, 175, 55, 0.08) 0%, transparent 30%);
+            pointer-events: none;
+        }
+
+        .philosophy-content {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .philosophy-text {
+            flex: 1;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.2s ease 0.5s forwards;
+        }
+
+        .philosophy-text h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--antique-gold);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .philosophy-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .philosophy-text p::before {
+            content: '•';
+            position: absolute;
+            left: -15px;
+            top: 5px;
+            color: var(--antique-gold);
+            font-size: 1.2rem;
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: var(--blood-red);
+            margin-top: 2rem;
+            text-align: right;
+            text-shadow: 0 0 10px rgba(138, 3, 3, 0.4);
+            position: relative;
+        }
+
+        .signature::after {
+            content: ' ✦';
+            color: var(--antique-gold);
+        }
+
+        footer {
+            padding: 4rem 5% 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--antique-gold), transparent);
+            animation: footerLine 3s infinite alternate;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--bone-white);
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--antique-gold);
+            transition: width 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--antique-gold);
+            transform: translateY(-3px) scale(1.1);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+
+        .social-links a:hover::before {
+            width: 100%;
+        }
+
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Animations */
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            }
+
+            100% {
+                text-shadow: 0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(138, 3, 3, 0.6);
+            }
+        }
+
+        @keyframes logoGlow {
+            0% {
+                text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            }
+
+            100% {
+                text-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+            }
+        }
+
+        @keyframes titleGlow {
+            0% {
+                text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            }
+
+            100% {
+                text-shadow: 0 0 35px rgba(212, 175, 55, 0.6);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(-50%) translateX(0);
+            }
+
+            50% {
+                transform: translateY(-52%) translateX(10px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0.25;
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.3;
+            }
+
+            25% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            75% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes rotatePattern {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes backgroundShift {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 100px 100px;
+            }
+        }
+
+        @keyframes svgOverlayMove {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 50px 50px;
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes modalTextFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes footerLine {
+            0% {
+                background-position: -100%;
+            }
+
+            100% {
+                background-position: 200%;
+            }
+        }
+
+        @keyframes borderPulse {
+            0% {
+                opacity: 0.2;
+            }
+
+            100% {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes titleLinePulse {
+            0% {
+                width: 50px;
+                background: var(--antique-gold);
+            }
+
+            100% {
+                width: 150px;
+                background: var(--blood-red);
+            }
+        }
+
+        @keyframes logoLine {
+            0% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes headerGlow {
+            0% {
+                box-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
+            }
+
+            100% {
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            }
+        }
+
+        @keyframes decorativeFloat {
+
+            0%,
+            100% {
+                transform: translateY(-50%) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-55%) rotate(5deg);
+            }
+        }
+
+        @keyframes artPulse {
+            0% {
+                opacity: 0.08;
+                transform: translate(-50%, -50%) scale(0.98);
+            }
+
+            100% {
+                opacity: 0.15;
+                transform: translate(-50%, -50%) scale(1.02);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero-image {
+                width: 40%;
+            }
+
+            .hero-decorative {
+                display: none;
+            }
+
+            .custom-image-placeholder {
+                display: none;
+            }
+
+            .gothic-art {
+                display: none;
+            }
+
+            .philosophy-content {
+                flex-direction: column;
+            }
+
+            .modal-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .modal-image {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 5rem;
+            }
+
+            .hero-content {
+                margin-bottom: 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-image {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                width: 80%;
+                margin: 0 auto;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+
+            .modal-info h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Generate floating particles -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const body = document.body;
+            // Create floating particles
+            for (let i = 0; i < 25; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = Math.random() * 100 + 'vh';
+                particle.style.animationDuration = (10 + Math.random() * 20) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.width = (2 + Math.random() * 4) + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = Math.random() > 0.5 ? 'var(--antique-gold)' : 'var(--blood-red)';
+                body.appendChild(particle);
+            }
+            // Create geometric patterns
+            const patterns = [{
+                    class: 'pattern-1',
+                    icon: 'fas fa-cross',
+                    top: '20%',
+                    left: '30%'
+                },
+                {
+                    class: 'pattern-2',
+                    icon: 'fas fa-skull',
+                    bottom: '25%',
+                    left: '10%'
+                },
+                {
+                    class: 'pattern-3',
+                    icon: 'fas fa-crown',
+                    top: '60%',
+                    right: '20%'
+                }
+            ];
+            patterns.forEach(pattern => {
+                const elem = document.createElement('div');
+                elem.className = `geometric-pattern ${pattern.class}`;
+                elem.innerHTML = `<i class="${pattern.icon}"></i>`;
+                if (pattern.top) elem.style.top = pattern.top;
+                if (pattern.bottom) elem.style.bottom = pattern.bottom;
+                if (pattern.left) elem.style.left = pattern.left;
+                if (pattern.right) elem.style.right = pattern.right;
+                body.appendChild(elem);
+            });
+        });
+    </script>
+    <div class="ornament ornament-1">
+        <i class="fas fa-cross"></i>
+    </div>
+    <div class="ornament ornament-2">
+        <i class="fas fa-skull"></i>
+    </div>
+    <div class="ornament ornament-3">
+        <i class="fas fa-crown"></i>
+    </div>
+    <!-- Gothic line art centerpiece -->
+    <div class="gothic-art">
+        <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="goldLine" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#d4af37" />
+                    <stop offset="100%" stop-color="#b8860b" />
+                </linearGradient>
+                <linearGradient id="bloodLine" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#8a0303" />
+                    <stop offset="100%" stop-color="#5a0000" />
+                </linearGradient>
+            </defs>
+            <!-- Central gothic arch -->
+            <path d="M400,50 Q550,150 400,250 Q250,150 400,50 Z" fill="none" stroke="url(#goldLine)" stroke-width="2" />
+            <!-- Ornate cross -->
+            <path d="M400,150 L400,350 M350,250 L450,250" stroke="url(#bloodLine)" stroke-width="1.5" />
+            <!-- Decorative flourishes -->
+            <path d="M200,200 Q250,150 300,200 Q250,250 200,200 Z" fill="none" stroke="url(#goldLine)"
+                stroke-width="1" />
+            <path d="M600,200 Q650,150 700,200 Q650,250 600,200 Z" fill="none" stroke="url(#goldLine)"
+                stroke-width="1" />
+            <!-- Gothic tracery -->
+            <path d="M300,400 Q400,450 500,400 Q400,350 300,400 Z" fill="none" stroke="url(#bloodLine)"
+                stroke-width="1.5" />
+            <!-- Crown motif -->
+            <path d="M400,450 L380,480 L390,460 L400,490 L410,460 L420,480 Z" fill="none" stroke="url(#goldLine)"
+                stroke-width="1.5" />
+            <!-- Intricate border elements -->
+            <g stroke="url(#goldLine)" stroke-width="0.8">
+                <circle cx="150" cy="150" r="20" fill="none" />
+                <circle cx="650" cy="150" r="20" fill="none" />
+                <circle cx="150" cy="450" r="20" fill="none" />
+                <circle cx="650" cy="450" r="20" fill="none" />
+            </g>
+            <!-- Geometric patterns -->
+            <g stroke="url(#bloodLine)" stroke-width="0.6" opacity="0.7">
+                <rect x="280" y="80" width="40" height="40" fill="none" />
+                <rect x="480" y="80" width="40" height="40" fill="none" />
+                <rect x="280" y="480" width="40" height="40" fill="none" />
+                <rect x="480" y="480" width="40" height="40" fill="none" />
+            </g>
+        </svg>
+    </div>
+    <header>
+        <div class="logo">DARK SOULS</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#collection">Collection</a></li>
+                <li><a href="#philosophy">Philosophy</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Eternal Elegance in Darkness</h1>
+            <p>Where gothic heritage meets contemporary luxury. Crafted with obsidian precision and adorned with antique
+                gold, our pieces embody the eternal dance between light and shadow.</p>
+            <a href="#collection" class="cta-button">Explore Collection</a>
+        </div>
+        <div class="custom-image-placeholder">           
+            <!-- ЗДЕСЬ ВСТАВЬТЕ ПУТЬ К ВАШЕЙ КАРТИНКЕ -->
+            <!-- Пример: <img src="ваш_путь_к_картинке.jpg" alt="Custom Image"> -->
+            <div>Замените этот текст на вашу картинку<br>Поместите путь к изображению в тег img<br>Пример: &lt;img
+                src="images/your-image.jpg" alt="Your Image"&gt;</div>
+        </div>
+        <div class="hero-decorative">
+            <svg viewBox="0 0 100 400" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50,20 L50,380" stroke="url(#goldGradient)" stroke-width="2" stroke-dasharray="5,10" />
+                <circle cx="50" cy="50" r="8" fill="none" stroke="url(#goldGradient)" stroke-width="2" />
+                <circle cx="50" cy="150" r="6" fill="none" stroke="url(#bloodGradient)" stroke-width="2" />
+                <circle cx="50" cy="250" r="8" fill="none" stroke="url(#goldGradient)" stroke-width="2" />
+                <circle cx="50" cy="350" r="6" fill="none" stroke="url(#bloodGradient)" stroke-width="2" />
+            </svg>
+        </div>
+    </section>
+    <section class="collection" id="collection">
+        <h2 class="section-title">Sacred Collection</h2>
+        <div class="gallery">
+            <div class="gallery-item" data-product="cross">
+                <img src="https://i.pinimg.com/originals/62/21/ff/6221ff45dbbe4316d12fe2b8031a57ad.jpg"
+                    alt="Cross Pendant">
+                <div class="gallery-overlay">
+                    <h3>Crimson Cross Pendant</h3>
+                    <p>Handcrafted in 18k gold with blood ruby accents</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-product="skull">
+                <img src="https://i.pinimg.com/736x/0b/22/04/0b22044d045a265e8b781c9207c48ee5.jpg" alt="Skull Ring">
+                <div class="gallery-overlay">
+                    <h3>Obsidian Skull Ring</h3>
+                    <p>Blackened silver with diamond eyes</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-product="crown">
+                <img src="https://i.pinimg.com/736x/a1/c4/db/a1c4db8a0da4c97cf5c0057cd7fd4734.jpg" alt="Crown Bracelet">
+                <div class="gallery-overlay">
+                    <h3>Royal Crown Cuff</h3>
+                    <p>Antique gold with onyx inlays</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="philosophy" id="philosophy">
+        <div class="philosophy-content">
+            <div class="philosophy-text">
+                <h2>Our Dark Philosophy</h2>
+                <p>In the shadows of forgotten cathedrals and the whispers of ancient crypts, we find our inspiration.
+                    Each piece is not merely jewelry—it is a talisman, a relic of eternal beauty born from the marriage
+                    of darkness and light.</p>
+                <p>We reject the ephemeral nature of modern fashion. Our creations are forged to transcend time,
+                    carrying the weight of history and the promise of eternity. Every curve, every engraving, every
+                    precious stone tells a story older than memory itself.</p>
+                <p class="signature">— The Dark Souls Atelier</p>
+            </div>
+            <div style="flex: 1; display: flex; justify-content: center;">
+                <svg width="300" height="400" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M150,50 Q250,150 150,250 Q50,150 150,50 Z" fill="none" stroke="url(#goldGradient)"
+                        stroke-width="2" />
+                    <circle cx="150" cy="150" r="30" fill="none" stroke="url(#goldGradient)" stroke-width="1.5" />
+                    <path d="M130,130 L170,170 M170,130 L130,170" stroke="url(#goldGradient)" stroke-width="1.5" />
+                    <path d="M100,300 Q150,350 200,300 Q150,250 100,300 Z" fill="none" stroke="url(#bloodGradient)"
+                        stroke-width="1.5" />
+                    <text x="150" y="380" text-anchor="middle" fill="url(#goldGradient)" font-family="Cinzel, serif"
+                        font-size="16" letter-spacing="2">ETERNAL</text>
+                </svg>
+            </div>
+        </div>
+    </section>
+    <footer id="contact">
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p class="copyright">© 2026 DARK SOULS | All Rights Reserved | Crafted in Eternal Darkness</p>
+    </footer>
+    <!-- Product Modals -->
+    <div class="modal" id="crossModal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <img src="https://i.pinimg.com/originals/62/21/ff/6221ff45dbbe4316d12fe2b8031a57ad.jpg"
+                alt="Cross Pendant Detail" class="modal-image">
+            <div class="modal-info">
+                <h2>Crimson Cross Pendant</h2>
+                <p>This exquisite pendant features a meticulously crafted cross in 18k antique gold, adorned with
+                    genuine blood rubies sourced from the deepest mines of Burma. Each stone is hand-selected for its
+                    perfect crimson hue and clarity.</p>
+                <p>The chain is crafted from the same 18k gold with a subtle oxidized finish that enhances the gothic
+                    aesthetic while maintaining timeless elegance.</p>
+                <div class="modal-price">$2,850</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="skullModal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <img src="https://i.pinimg.com/736x/0b/22/04/0b22044d045a265e8b781c9207c48ee5.jpg" alt="Skull Ring Detail"
+                class="modal-image">
+            <div class="modal-info">
+                <h2>Obsidian Skull Ring</h2>
+                <p>Forged from blackened sterling silver using ancient techniques, this skull ring features intricate
+                    detailing that captures every bone structure with anatomical precision. The eyes are set with
+                    brilliant-cut diamonds that catch the light with an otherworldly gleam.</p>
+                <p>Each ring is individually cast and finished by hand, ensuring no two pieces are exactly alike—a true
+                    testament to artisanal craftsmanship.</p>
+                <div class="modal-price">$1,200</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="crownModal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <img src="https://i.pinimg.com/736x/a1/c4/db/a1c4db8a0da4c97cf5c0057cd7fd4734.jpg"
+                alt="Crown Bracelet Detail" class="modal-image">
+            <div class="modal-info">
+                <h2>Royal Crown Cuff</h2>
+                <p>This statement cuff bracelet draws inspiration from medieval royal regalia, featuring a crown motif
+                    crafted in 18k gold with black onyx inlays. The interior is lined with soft leather for comfort
+                    during extended wear.</p>
+                <p>The bracelet opens with a hidden clasp mechanism that maintains the seamless appearance of the design
+                    while ensuring security.</p>
+                <div class="modal-price">$3,450</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Gallery item click handlers
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function () {
+                const product = this.getAttribute('data-product');
+                const modal = document.getElementById(product + 'Modal');
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        // Modal close handlers
+        document.querySelectorAll('.modal-close').forEach(button => {
+            button.addEventListener('click', function () {
+                const modal = this.closest('.modal');
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+        // Close modal when clicking outside content
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function (e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+        // Smooth scrolling for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        // Add parallax effect to ornaments on scroll
+        window.addEventListener('scroll', function () {
+            const scrollY = window.scrollY;
+            document.querySelectorAll('.ornament').forEach((ornament, index) => {
+                const speed = 0.1 + (index * 0.05);
+                ornament.style.transform =
+                    `translateY(${scrollY * speed}px) ${ornament.style.transform.includes('rotate') ? ornament.style.transform.split(' ')[1] : ''}`;
+            });
+        });
+    </script>
+</body>
+
+</html>
