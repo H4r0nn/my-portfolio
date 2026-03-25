@@ -37,7 +37,7 @@ export default function Contacts() {
     { 
       platform: 'YouTube', 
       handle: 'YouTube канал', 
-      link: 'https://youtube.com/@your-channel',
+      link: 'https://youtube.com',
       icon: '🎬',
       color: 'hover:border-red-600 hover:from-red-900/30 hover:to-pink-900/30',
       gradient: 'from-red-600 to-pink-600'

@@ -6,16 +6,16 @@ export default function About() {
     { name: 'React', icon: '⚛️', desc: 'Hooks, Context, Components', level: 3 },
     { name: 'Tailwind CSS', icon: '🎨', desc: 'Utility-first, адаптив', level: 4 },
     { name: 'JavaScript', icon: '📜', desc: 'ES6+, асинхронность', level: 4 },
-    { name: 'Git / GitHub', icon: '🌿', desc: 'Branching, PR, деплой', level: 4 },
+    { name: 'Git / GitHub', icon: '🌿', desc: 'Branching, PR, деплой', level: 3 },
     { name: 'Figma', icon: '✏️', desc: 'UI/UX, прототипы, макеты', level: 5 },
-    { name: 'Premiere Pro', icon: '🎬', desc: 'Монтаж геймплейных хайлайтов', level: 3 },
-    { name: 'FPV / Дроны', icon: '🚁', desc: 'Съёмка, стабилизация', level: 5 },
+    { name: 'Premiere Pro', icon: '🎬', desc: 'Монтаж и нарезка', level: 3 },
+    { name: 'FPV / Дроны', icon: '🚁', desc: 'Съёмка на заказ', level: 5 },
   ];
 
   const interests = [
     { icon: '🎮', text: 'Dota 2, сим-рейсинг' },
     { icon: '🏍️', text: 'Мотокросс (7 лет опыта)' },
-    { icon: '🏠', text: 'Компания «МобилДом»' },
+    { icon: '🏃🏻', text: 'Спорт' },
     { icon: '🤿', text: 'Дайвинг (лицензия)' },
     { icon: '💻', text: 'Веб-разработка, дизайн' },
     { icon: '✈️', text: 'Путешествия, новые технологии' },
@@ -50,7 +50,7 @@ export default function About() {
               <p className="text-gray-300 leading-relaxed">
                 4 курс, специальность «Информационные системы и программирование». 
                 Создаю современные веб-приложения, сочетаю технические навыки с креативным подходом. 
-                Владею компанией «МобилДом» по строительству быстровозводимых домов.
+                Программист компании «МобилДом» по строительству быстровозводимых домов.
               </p>
             </div>
           </div>

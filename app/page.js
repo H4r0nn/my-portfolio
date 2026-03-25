@@ -40,13 +40,7 @@ export default function Home() {
               Связаться
             </Link>
           </div>
-          
-          {/* Быстрые ссылки */}
-          <div className="mt-16 flex justify-center gap-6 text-sm text-gray-400">
-            <a href="#about" className="hover:text-purple-400 transition-colors">Обо мне</a>
-            <a href="#projects" className="hover:text-purple-400 transition-colors">Проекты</a>
-            <a href="#contacts" className="hover:text-purple-400 transition-colors">Контакты</a>
-          </div>
+        
         </div>
       </section>
     </main>

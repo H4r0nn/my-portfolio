@@ -20,7 +20,7 @@ export default function Projects() {
     },
     {
       title: 'Пародия на Ebay',
-      description: 'Юмористическая версия маркетплейса с необычными товарами и интерактивными элементами.',
+      description: 'Юмористическая версия маркетплейса с товарами, личным профилем профилем, заказами и интерактивными элементами.',
       tags: ['HTML', 'CSS', 'JavaScript'],
       demo: '/ebay-parody.html', // Ссылка на HTML файл в /public
       color: 'from-orange-500 to-amber-500',
@@ -28,7 +28,7 @@ export default function Projects() {
     },
     {
       title: 'Магазин ювелирии',
-      description: 'Интернет-магазин ювелирных изделий с каталогом, корзиной и адаптивным дизайном.',
+      description: 'Проект с средневековым стилем, сделаный в качестве учебного проекта.',
       tags: ['HTML', 'CSS', 'JavaScript'],
       demo: '/jewelry-store.html', // Ссылка на HTML файл в /public
       color: 'from-pink-500 to-rose-500',
@@ -36,7 +36,7 @@ export default function Projects() {
     },
     {
       title: 'Геймплейные хайлайты',
-      description: 'Коллекция смонтированных видео из Counter-Strike 2 с динамичным монтажом и эффектами.',
+      description: 'Коллекция смонтированных видео с динамичным монтажом и эффектами.',
       tags: ['Premiere Pro', 'After Effects'],
       demo: 'https://youtube.com', // ЗАМЕНИ на свой канал
       color: 'from-red-500 to-pink-600',
@@ -44,7 +44,7 @@ export default function Projects() {
     },
     {
       title: 'FPV-съёмка: проморолик',
-      description: 'Динамичный видеоролик, снятый на дрон с управлением от первого лица.',
+      description: 'Динамичный видеоролик, снятый на дрон.',
       tags: ['FPV', 'DaVinci Resolve'],
       demo: '#', // Пока нет ссылки
       color: 'from-emerald-500 to-teal-500',
@@ -116,7 +116,7 @@ export default function Projects() {
                   rel={project.demo.startsWith('http') ? 'noopener noreferrer' : undefined}
                   className={`w-full px-4 py-3 bg-gradient-to-r ${project.color} text-white rounded-xl text-sm font-medium text-center hover:shadow-lg hover:scale-[1.02] transition-all neon-border block`}
                 >
-                  👁 Посмотреть демо
+                 Посмотреть
                 </a>
               </div>
             </article>
