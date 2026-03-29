@@ -1,11 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',           // ✅ Статический экспорт
-  images: {
-    unoptimized: true,        // ✅ Отключаем оптимизацию изображений
-  },
-  basePath: '/my-portfolio',  // ✅ ВАЖНО: имя твоего репозитория
-  assetPrefix: '/my-portfolio/', // ✅ Для корректной загрузки стилей и скриптов
+  output: 'export',
+  images: { unoptimized: true },
+  basePath: process.env.NODE_ENV === 'production' ? '/my-portfolio' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/my-portfolio/' : '',
 };
-
 export default nextConfig;
