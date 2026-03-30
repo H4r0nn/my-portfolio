@@ -1,6 +1,6 @@
 'use client';
-import { useState, Suspense } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState, Suspense, useEffect } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
 
 // Динамический импорт ThreeBackground
@@ -24,17 +24,108 @@ const staggerContainer = {
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('home');
+  const [expandedSkill, setExpandedSkill] = useState(null);
   const { scrollYProgress } = useScroll();
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
-  // ✅ Навыки с оценкой 5-балльной (вместо процентов)
+  // ✅ Авто-определение активной секции при скролле
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'about', 'services', 'projects', 'contacts'];
+      const scrollPosition = window.scrollY + 200; // Отступ для точности
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetHeight = element.offsetHeight;
+
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Навыки с описаниями (8 навыков с CapCut и Photoshop)
   const skills = [
-    { name: 'Next.js', level: 4, category: 'Frontend' },
-    { name: 'React', level: 4, category: 'Frontend' },
-    { name: 'Tailwind CSS', level: 5, category: 'Styling' },
-    { name: 'JavaScript', level: 4, category: 'Language' },
-    { name: 'Git / GitHub', level: 4, category: 'Tools' },
-    { name: 'Figma', level: 3, category: 'Design' },
+    { 
+      name: 'Next.js', 
+      level: 4, 
+      category: 'Frontend',
+      description: 'Фреймворк для React с серверным рендерингом, статической генерацией и маршрутизацией. Использую для создания быстрых и SEO-оптимизированных сайтов.'
+    },
+    { 
+      name: 'React', 
+      level: 4, 
+      category: 'Frontend',
+      description: 'Библиотека для создания пользовательских интерфейсов. Компонентный подход, виртуальный DOM, хуки — основа моих веб-приложений.'
+    },
+    { 
+      name: 'Tailwind CSS', 
+      level: 5, 
+      category: 'Styling',
+      description: 'Утилитарный CSS-фреймворк для быстрой стилизации. Позволяет создавать адаптивный дизайн без написания кастомного CSS.'
+    },
+    { 
+      name: 'JavaScript', 
+      level: 4, 
+      category: 'Language',
+      description: 'Основной язык программирования для веба. ES6+, асинхронность, работа с DOM, API — база для всех моих проектов.'
+    },
+    { 
+      name: 'Git / GitHub', 
+      level: 4, 
+      category: 'Tools',
+      description: 'Система контроля версий и платформа для хостинга кода. Ветвление, мерж, pull request — ежедневная работа с кодом.'
+    },
+    { 
+      name: 'Figma', 
+      level: 3, 
+      category: 'Design',
+      description: 'Инструмент для проектирования интерфейсов. Прототипы, макеты, дизайн-системы — создаю визуальную часть перед разработкой.'
+    },
+    { 
+      name: 'CapCut', 
+      level: 4, 
+      category: 'Media',
+      description: 'Видеоредактор для быстрого монтажа. Эффекты, переходы, цветокоррекция — создаю динамичные ролики для соцсетей.'
+    },
+    { 
+      name: 'Photoshop', 
+      level: 3, 
+      category: 'Design',
+      description: 'Графический редактор для работы с изображениями. Обработка фото, создание графики, работа со слоями — базовые навыки дизайна.'
+    },
+  ];
+
+  // Услуги (4 услуги с UI/UX Дизайном)
+  const services = [
+    { 
+      title: 'Веб-сайты', 
+      desc: 'Лендинги, корпоративные сайты, портфолио. Современный дизайн и адаптивная вёрстка.',
+      tech: ['Next.js', 'React', 'Tailwind CSS']
+    },
+    { 
+      title: 'Web-приложения', 
+      desc: 'Интерактивные приложения с современным стеком. SPA, PWA, сложные интерфейсы.',
+      tech: ['React', 'Next.js', 'TypeScript']
+    },
+    { 
+      title: 'UI/UX Дизайн', 
+      desc: 'Прототипы, макеты, пользовательские интерфейсы. Продуманный UX и современный UI.',
+      tech: ['Figma', 'Prototyping', 'Wireframing']
+    },
+    { 
+      title: 'Видеомонтаж', 
+      desc: 'Геймплейные хайлайты, промо-ролики, динамичный монтаж с эффектами.',
+      tech: ['Premiere Pro', 'After Effects', 'CapCut']
+    },
   ];
 
   const projects = [
@@ -50,21 +141,21 @@ export default function Home() {
       title: 'Сайт компании MobilDom',
       description: 'Лендинг для компании по строительству быстровозводимых домов.',
       tags: ['HTML', 'CSS', 'JavaScript'],
-      demo: 'https://mobildom.pro',
+      demo: 'https://mobildom.ru',
       category: 'Web',
       year: '2024'
     },
     {
       title: 'Пародия на Ebay',
-      description: 'Юмористическая версия маркетплейса с профилем и заказами.',
+      description: 'Юмористическая версия маркетплейса с необычными товарами.',
       tags: ['HTML', 'CSS', 'JavaScript'],
       demo: 'ebay-parody.html',
       category: 'Web',
-      year: '2026'
+      year: '2024'
     },
     {
       title: 'Магазин ювелирии',
-      description: 'Интернет-магазин ювелирных изделий в готическом стиле.',
+      description: 'Интернет-магазин ювелирных изделий с каталогом и корзиной.',
       tags: ['HTML', 'CSS', 'JavaScript'],
       demo: 'jewelry-store.html',
       category: 'Web',
@@ -72,7 +163,7 @@ export default function Home() {
     },
     {
       title: 'Геймплейные хайлайты',
-      description: 'Коллекция смонтированных видео и нарезок.',
+      description: 'Коллекция смонтированных видео из Counter-Strike 2.',
       tags: ['Premiere Pro', 'After Effects'],
       demo: 'https://youtube.com',
       category: 'Media',
@@ -88,22 +179,17 @@ export default function Home() {
     },
   ];
 
-  // ✅ Обновлённые интересы (Dota 2, Спорт, без МобилДом)
-  const interests = [
-    { icon: '🎮', text: 'Dota 2', sub: 'Любимая игра' },
-    { icon: '🏍️', text: 'Мотокросс', sub: '7 лет опыта' },
-    { icon: '⚽', text: 'Спорт', sub: 'Активный образ жизни' },
-    { icon: '🤿', text: 'Дайвинг', sub: 'Лицензия' },
-    { icon: '🚁', text: 'FPV', sub: 'Съёмка' },
-    { icon: '💻', text: 'Разработка', sub: 'Веб-приложения' },
-  ];
-
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
       setActiveSection(id);
     }
+  };
+
+  // Обработчик клика на навык
+  const toggleSkill = (index) => {
+    setExpandedSkill(expandedSkill === index ? null : index);
   };
 
   return (
@@ -134,6 +220,7 @@ export default function Home() {
               {[
                 { id: 'home', label: 'Главная' },
                 { id: 'about', label: 'Обо мне' },
+                { id: 'services', label: 'Услуги' },
                 { id: 'projects', label: 'Проекты' },
                 { id: 'contacts', label: 'Контакты' },
               ].map((item) => (
@@ -192,10 +279,10 @@ export default function Home() {
               
               <motion.div className="flex flex-col sm:flex-row gap-4" variants={fadeInUp}>
                 <button 
-                  onClick={() => scrollToSection('projects')}
+                  onClick={() => scrollToSection('services')}
                   className="px-8 py-4 bg-slate-100 text-slate-900 font-semibold text-sm tracking-wide uppercase hover:bg-white hover:scale-105 transition-all"
                 >
-                  Проекты
+                  Услуги
                 </button>
                 <button 
                   onClick={() => scrollToSection('contacts')}
@@ -256,6 +343,7 @@ export default function Home() {
             transition={{ delay: 0.6, duration: 0.6 }}
           >
             <button onClick={() => scrollToSection('about')} className="hover:text-white transition-colors uppercase tracking-wider">Обо мне ↓</button>
+            <button onClick={() => scrollToSection('services')} className="hover:text-white transition-colors uppercase tracking-wider">Услуги ↓</button>
             <button onClick={() => scrollToSection('projects')} className="hover:text-white transition-colors uppercase tracking-wider">Проекты ↓</button>
             <button onClick={() => scrollToSection('contacts')} className="hover:text-white transition-colors uppercase tracking-wider">Связаться ↓</button>
           </motion.div>
@@ -272,7 +360,6 @@ export default function Home() {
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-xs text-slate-400 uppercase tracking-widest">Информация</span>
             <h2 className="text-5xl md:text-7xl font-bold text-white mt-2 tracking-tight">ОБО МНЕ</h2>
           </motion.div>
 
@@ -312,7 +399,7 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* ✅ Навыки с 5-балльной оценкой */}
+          {/* Навыки с раскрывающимися описаниями */}
           <motion.div 
             className="mb-16"
             initial={{ opacity: 0, y: 40 }}
@@ -320,7 +407,6 @@ export default function Home() {
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-xs text-slate-400 uppercase tracking-widest">Компетенции</span>
             <h3 className="text-3xl font-bold text-white mt-2 mb-8 tracking-tight">НАВЫКИ</h3>
             
             <motion.div 
@@ -333,16 +419,24 @@ export default function Home() {
               {skills.map((skill, index) => (
                 <motion.div 
                   key={index}
-                  className="bg-slate-800/60 backdrop-blur-sm border border-slate-700 p-5 group"
+                  className={`bg-slate-800/60 backdrop-blur-sm border p-5 cursor-pointer transition-all duration-300 ${
+                    expandedSkill === index 
+                      ? 'border-purple-500 bg-slate-800/80' 
+                      : 'border-slate-700 hover:border-slate-500 hover:bg-slate-800/70'
+                  }`}
                   variants={fadeInUp}
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ duration: 0.2 }}
+                  onClick={() => toggleSkill(index)}
                 >
                   <div className="text-xs text-slate-400 uppercase tracking-wider mb-2">{skill.category}</div>
-                  <div className="text-lg text-white font-semibold mb-3">{skill.name}</div>
+                  <div className="text-lg text-white font-semibold mb-3 flex items-center justify-between">
+                    {skill.name}
+                    <span className={`text-xs transition-transform duration-300 ${expandedSkill === index ? 'rotate-180' : ''}`}>
+                      ▼
+                    </span>
+                  </div>
                   
-                  {/* ✅ 5-балльная оценка вместо процентов */}
-                  <div className="flex gap-1 mb-2">
+                  {/* 5-балльная оценка */}
+                  <div className="flex gap-1 mb-3">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <span
                         key={star}
@@ -354,41 +448,26 @@ export default function Home() {
                       </span>
                     ))}
                   </div>
-                  <div className="text-xs text-slate-400">{skill.level}/5</div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* ✅ Обновлённые интересы */}
-          <motion.div 
-            className="mb-16"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="text-xs text-slate-400 uppercase tracking-widest">Личное</span>
-            <h3 className="text-3xl font-bold text-white mt-2 mb-8 tracking-tight">ИНТЕРЕСЫ</h3>
-            
-            <motion.div 
-              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: false, amount: 0.3 }}
-            >
-              {interests.map((item, index) => (
-                <motion.div 
-                  key={index} 
-                  className="bg-slate-800/60 backdrop-blur-sm border border-slate-700 p-5 text-center hover:bg-slate-700/50 transition-colors"
-                  variants={fadeInUp}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="text-3xl mb-3 grayscale hover:grayscale-0 transition-all">{item.icon}</div>
-                  <div className="text-sm text-white font-medium">{item.text}</div>
-                  <div className="text-xs text-slate-400 mt-1">{item.sub}</div>
+                  <div className="text-xs text-slate-400 mb-3">{skill.level}/5</div>
+                  
+                  {/* Раскрывающееся описание */}
+                  <AnimatePresence>
+                    {expandedSkill === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pt-3 border-t border-slate-700">
+                          <p className="text-xs text-slate-300 leading-relaxed">
+                            {skill.description}
+                          </p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               ))}
             </motion.div>
@@ -396,8 +475,60 @@ export default function Home() {
         </div>
       </section>
 
+      {/* СЕКЦИЯ: УСЛУГИ */}
+      <section id="services" className="min-h-screen py-20 px-6 relative z-10">
+        <div className="max-w-6xl mx-auto">
+          <motion.div 
+            className="mb-16"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-5xl md:text-7xl font-bold text-white mt-2 tracking-tight">УСЛУГИ</h2>
+          </motion.div>
+
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: false, amount: 0.3 }}
+          >
+            {services.map((service, index) => (
+              <motion.div 
+                key={index} 
+                className="bg-slate-800/60 backdrop-blur-sm border border-slate-700 p-8"
+                variants={fadeInUp}
+              >
+                <h3 className="text-xl text-white font-bold mb-4">{service.title}</h3>
+                
+                <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                  {service.desc}
+                </p>
+                
+                <div className="h-px bg-slate-700 mb-6" />
+                
+                <div className="flex flex-wrap gap-2">
+                  {service.tech.map((tech, i) => (
+                    <span 
+                      key={i}
+                      className="px-3 py-1.5 bg-slate-700/50 text-xs text-slate-300 font-medium"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* ✅ УБРАН CTA БЛОК */}
+        </div>
+      </section>
+
       {/* СЕКЦИЯ: ПРОЕКТЫ */}
-      <section id="projects" className="min-h-screen py-20 px-6 relative z-10">
+      <section id="projects" className="min-h-screen py-20 px-6 relative z-10 bg-slate-800/30">
         <div className="max-w-7xl mx-auto">
           <motion.div 
             className="mb-16"
@@ -406,7 +537,6 @@ export default function Home() {
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-xs text-slate-400 uppercase tracking-widest">Портфолио</span>
             <h2 className="text-5xl md:text-7xl font-bold text-white mt-2 tracking-tight">ПРОЕКТЫ</h2>
           </motion.div>
 
@@ -473,27 +603,12 @@ export default function Home() {
             ))}
           </motion.div>
 
-          <motion.div 
-            className="mt-20 bg-slate-800/60 backdrop-blur-sm border border-slate-700 p-12 text-center"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h3 className="text-2xl font-bold text-white mb-4 tracking-tight">ХОЧЕШЬ СОЗДАТЬ ЧТО-ТО ПОДОБНОЕ?</h3>
-            <p className="text-slate-400 mb-8">Открыт к предложениям о работе и фриланс-проектам.</p>
-            <button 
-              onClick={() => scrollToSection('contacts')}
-              className="px-8 py-4 bg-slate-100 text-slate-900 font-semibold text-sm uppercase tracking-wider hover:bg-white hover:scale-105 transition-all"
-            >
-              Связаться со мной
-            </button>
-          </motion.div>
+          {/* ✅ УБРАН CTA БЛОК */}
         </div>
       </section>
 
       {/* СЕКЦИЯ: КОНТАКТЫ */}
-      <section id="contacts" className="min-h-screen py-20 px-6 relative z-10 bg-slate-800/30">
+      <section id="contacts" className="min-h-screen py-20 px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
           <motion.div 
             className="mb-16"
@@ -502,11 +617,10 @@ export default function Home() {
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-xs text-slate-400 uppercase tracking-widest">Связь</span>
             <h2 className="text-5xl md:text-7xl font-bold text-white mt-2 tracking-tight">КОНТАКТЫ</h2>
           </motion.div>
 
-          {/* ✅ Только Email и GitHub */}
+          {/* Только Email и GitHub */}
           <motion.div 
             className="grid md:grid-cols-2 gap-6 mb-16"
             variants={staggerContainer}
@@ -615,7 +729,7 @@ export default function Home() {
             {[
               { value: '24 ЧАСА', label: 'Время ответа' },
               { value: 'UTC+3', label: 'Часовой пояс' },
-              { value: 'СОЧИ', label: 'Локация' },
+              { value: 'СОЧИ', label: 'Локация' },  /* ✅ Москва → Сочи */
             ].map((item, index) => (
               <motion.div 
                 key={index}
@@ -636,7 +750,7 @@ export default function Home() {
       <footer className="py-12 px-6 border-t border-slate-800 relative z-10 bg-slate-900">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-slate-400 text-sm">
-            © 2026 Haron. Все права защищены.
+            © 2025 Haron. Все права защищены.
           </p>
           <p className="text-slate-500 text-xs mt-2">
             Создано с использованием Next.js, Tailwind CSS и Three.js
