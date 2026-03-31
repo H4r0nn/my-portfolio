@@ -28,11 +28,11 @@ export default function Home() {
   const { scrollYProgress } = useScroll();
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
-  // ✅ Авто-определение активной секции при скролле
+  // Авто-определение активной секции при скролле
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['home', 'about', 'services', 'projects', 'contacts'];
-      const scrollPosition = window.scrollY + 200; // Отступ для точности
+      const scrollPosition = window.scrollY + 200;
 
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -52,59 +52,59 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Навыки с описаниями (8 навыков с CapCut и Photoshop)
+  // Навыки с описаниями
   const skills = [
     { 
       name: 'Next.js', 
       level: 4, 
       category: 'Frontend',
-      description: 'Фреймворк для React с серверным рендерингом, статической генерацией и маршрутизацией. Использую для создания быстрых и SEO-оптимизированных сайтов.'
+      description: 'Фреймворк для React с серверным рендерингом, статической генерацией и маршрутизацией.'
     },
     { 
       name: 'React', 
       level: 4, 
       category: 'Frontend',
-      description: 'Библиотека для создания пользовательских интерфейсов. Компонентный подход, виртуальный DOM, хуки — основа моих веб-приложений.'
+      description: 'Библиотека для создания пользовательских интерфейсов. Компонентный подход, виртуальный DOM.'
     },
     { 
       name: 'Tailwind CSS', 
       level: 5, 
       category: 'Styling',
-      description: 'Утилитарный CSS-фреймворк для быстрой стилизации. Позволяет создавать адаптивный дизайн без написания кастомного CSS.'
+      description: 'Утилитарный CSS-фреймворк для быстрой стилизации и адаптивного дизайна.'
     },
     { 
       name: 'JavaScript', 
       level: 4, 
       category: 'Language',
-      description: 'Основной язык программирования для веба. ES6+, асинхронность, работа с DOM, API — база для всех моих проектов.'
+      description: 'Основной язык программирования для веба. ES6+, асинхронность, работа с DOM.'
     },
     { 
       name: 'Git / GitHub', 
       level: 4, 
       category: 'Tools',
-      description: 'Система контроля версий и платформа для хостинга кода. Ветвление, мерж, pull request — ежедневная работа с кодом.'
+      description: 'Система контроля версий. Ветвление, мерж, pull request — ежедневная работа.'
     },
     { 
       name: 'Figma', 
       level: 3, 
       category: 'Design',
-      description: 'Инструмент для проектирования интерфейсов. Прототипы, макеты, дизайн-системы — создаю визуальную часть перед разработкой.'
+      description: 'Инструмент для проектирования интерфейсов. Прототипы, макеты, дизайн-системы.'
     },
     { 
       name: 'CapCut', 
       level: 4, 
       category: 'Media',
-      description: 'Видеоредактор для быстрого монтажа. Эффекты, переходы, цветокоррекция — создаю динамичные ролики для соцсетей.'
+      description: 'Видеоредактор для быстрого монтажа. Эффекты, переходы, цветокоррекция.'
     },
     { 
       name: 'Photoshop', 
       level: 3, 
       category: 'Design',
-      description: 'Графический редактор для работы с изображениями. Обработка фото, создание графики, работа со слоями — базовые навыки дизайна.'
+      description: 'Графический редактор. Обработка фото, создание графики, работа со слоями.'
     },
   ];
 
-  // Услуги (4 услуги с UI/UX Дизайном)
+  // Услуги
   const services = [
     { 
       title: 'Веб-сайты', 
@@ -187,7 +187,6 @@ export default function Home() {
     }
   };
 
-  // Обработчик клика на навык
   const toggleSkill = (index) => {
     setExpandedSkill(expandedSkill === index ? null : index);
   };
@@ -364,6 +363,7 @@ export default function Home() {
           </motion.div>
 
           <div className="grid md:grid-cols-12 gap-6 mb-16">
+            {/* АВАТАРКА */}
             <motion.div 
               className="md:col-span-4"
               initial={{ opacity: 0, x: -40 }}
@@ -371,8 +371,12 @@ export default function Home() {
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="bg-slate-800/60 backdrop-blur-sm border border-slate-700 aspect-square flex items-center justify-center">
-                <div className="text-8xl font-bold text-white">H</div>
+              <div className="bg-slate-800/60 backdrop-blur-sm border border-slate-700 aspect-square flex items-center justify-center overflow-hidden rounded-lg">
+                <img 
+                  src="/avatar.jpg" 
+                  alt="Haron Avatar"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </motion.div>
             
@@ -399,7 +403,7 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Навыки с раскрывающимися описаниями */}
+          {/* НАВЫКИ */}
           <motion.div 
             className="mb-16"
             initial={{ opacity: 0, y: 40 }}
@@ -410,7 +414,7 @@ export default function Home() {
             <h3 className="text-3xl font-bold text-white mt-2 mb-8 tracking-tight">НАВЫКИ</h3>
             
             <motion.div 
-              className="grid md:grid-cols-2 lg:grid-cols-4 gap-4"
+              className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 items-start"
               variants={staggerContainer}
               initial="initial"
               whileInView="animate"
@@ -426,6 +430,10 @@ export default function Home() {
                   }`}
                   variants={fadeInUp}
                   onClick={() => toggleSkill(index)}
+                  style={{ 
+                    alignSelf: 'stretch',
+                    height: 'fit-content'
+                  }}
                 >
                   <div className="text-xs text-slate-400 uppercase tracking-wider mb-2">{skill.category}</div>
                   <div className="text-lg text-white font-semibold mb-3 flex items-center justify-between">
@@ -522,8 +530,6 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
-
-          {/* ✅ УБРАН CTA БЛОК */}
         </div>
       </section>
 
@@ -602,8 +608,6 @@ export default function Home() {
               </motion.article>
             ))}
           </motion.div>
-
-          {/* ✅ УБРАН CTA БЛОК */}
         </div>
       </section>
 
@@ -729,7 +733,7 @@ export default function Home() {
             {[
               { value: '24 ЧАСА', label: 'Время ответа' },
               { value: 'UTC+3', label: 'Часовой пояс' },
-              { value: 'СОЧИ', label: 'Локация' },  /* ✅ Москва → Сочи */
+              { value: 'СОЧИ', label: 'Локация' },
             ].map((item, index) => (
               <motion.div 
                 key={index}

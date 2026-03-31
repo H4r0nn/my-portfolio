@@ -2,11 +2,11 @@
 
 import { useRef, useMemo, useState, useEffect } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Points, PointMaterial } from '@react-three/drei'
+import { Points, PointMaterial, Text } from '@react-three/drei'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import * as THREE from 'three'
 
-// Частицы фона (ОЧЕНЬ МЕДЛЕННО)
+// Частицы фона
 function ParticleField({ scrollY }) {
   const ref = useRef()
   
@@ -26,13 +26,11 @@ function ParticleField({ scrollY }) {
 
   useFrame((state, delta) => {
     if (!ref.current) return
-    // ✅ МЕДЛЕННОЕ вращение (было delta / 10, стало delta / 50)
     ref.current.rotation.x -= delta / 50
     ref.current.rotation.y -= delta / 60
     const time = state.clock.elapsedTime
     const scale = 1 + Math.sin(time * 0.3) * 0.05
     ref.current.scale.set(scale, scale, scale)
-    // ✅ МЕДЛЕННАЯ реакция на скролл
     ref.current.rotation.z = scrollY * 0.0001
     ref.current.position.y = -scrollY * 0.00005
   })
@@ -53,7 +51,7 @@ function ParticleField({ scrollY }) {
   )
 }
 
-// 3D Текст HARON из частиц (ОЧЕНЬ МЕДЛЕННО)
+// 3D Текст HARON из частиц
 function ParticleText({ scrollY }) {
   const ref = useRef()
   
@@ -93,11 +91,9 @@ function ParticleText({ scrollY }) {
 
   useFrame((state) => {
     if (!ref.current) return
-    // ✅ МЕДЛЕННОЕ вращение от скролла
     ref.current.rotation.y = scrollY * 0.00005
     ref.current.rotation.x = Math.sin(scrollY * 0.00003) * 0.05
     const time = state.clock.elapsedTime
-    // ✅ МЕДЛЕННАЯ пульсация
     const scale = 1 + Math.sin(time * 0.5) * 0.02
     ref.current.scale.set(scale, scale, scale)
     const targetOpacity = 0.9
@@ -135,7 +131,7 @@ function ParticleText({ scrollY }) {
   )
 }
 
-// 🪐 Кольца Сатурна из частиц (ОЧЕНЬ МЕДЛЕННО)
+// Кольца Сатурна из частиц
 function GlowingRings({ scrollY }) {
   const ref = useRef()
   
@@ -179,11 +175,7 @@ function GlowingRings({ scrollY }) {
 
   useFrame((state, delta) => {
     if (!ref.current) return
-    
-    // ✅ ОЧЕНЬ МЕДЛЕННОЕ вращение (было delta * 0.05, стало delta * 0.01)
     ref.current.rotation.z += delta * 0.01
-    
-    // ✅ МЕДЛЕННАЯ реакция на скролл
     ref.current.rotation.x = THREE.MathUtils.lerp(
       ref.current.rotation.x,
       scrollY * 0.00005,
@@ -194,8 +186,6 @@ function GlowingRings({ scrollY }) {
       scrollY * 0.00005,
       0.02
     )
-    
-    // ✅ МЕДЛЕННАЯ пульсация
     const time = state.clock.elapsedTime
     ref.current.scale.setScalar(1 + Math.sin(time * 0.3) * 0.02)
   })
@@ -232,7 +222,7 @@ function GlowingRings({ scrollY }) {
   )
 }
 
-// Плавающие кристаллы (ОЧЕНЬ МЕДЛЕННО)
+// Плавающие кристаллы
 function FloatingCrystals({ scrollY }) {
   const crystals = useMemo(() => 
     Array.from({ length: 5 }, () => ({
@@ -256,12 +246,10 @@ function Crystal({ position, scale, speed, color, scrollY }) {
   const ref = useRef()
   useFrame((state, delta) => {
     if (!ref.current) return
-    // ✅ МЕДЛЕННОЕ вращение
     ref.current.rotation.x += delta * speed * 0.2
     ref.current.rotation.y += delta * speed * 0.25
     ref.current.rotation.z = scrollY * 0.00005
     const time = state.clock.elapsedTime
-    // ✅ МЕДЛЕННОЕ парение
     ref.current.position.y = position[1] + Math.sin(time * speed) * 0.1
   })
   return (
@@ -272,7 +260,7 @@ function Crystal({ position, scale, speed, color, scrollY }) {
   )
 }
 
-// 🖱️ Шлейф от мыши
+// Шлейф от мыши
 function MouseTrail() {
   const { pointer } = useThree()
   const ref = useRef()
